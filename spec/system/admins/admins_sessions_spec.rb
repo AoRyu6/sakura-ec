@@ -28,7 +28,6 @@ RSpec.describe 'Admins::Sessions', type: :system do
     it 'ログインできること' do
       visit admins_root_path
 
-      expect(page).not_to have_current_path admins_root_path
       expect(page).to have_current_path new_admin_session_path
 
       fill_in 'メールアドレス', with: 'admin@example.com'
