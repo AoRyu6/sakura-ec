@@ -43,6 +43,10 @@ group :development, :test do
 
   gem 'erb_lint', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
+
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
