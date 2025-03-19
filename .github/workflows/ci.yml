@@ -112,7 +112,6 @@ jobs:
 
       - name: asset compile
         run: |
-          cp config/database.yml.sample config/database.yml
           bin/rails assets:precompile
 
       - name: Run tests
