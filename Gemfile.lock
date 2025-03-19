@@ -465,11 +465,11 @@ DEPENDENCIES
   html2haml
   jsbundling-rails
   letter_opener_web
-  pg (~> 1.1)
+  pg
   pg_query
   propshaft
   prosopite
-  puma (>= 5.0)
+  puma
   rails (~> 8.0.2)
   rails-i18n
   rspec-rails
