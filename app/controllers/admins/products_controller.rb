@@ -1,5 +1,5 @@
 class Admins::ProductsController < ApplicationController
-  before_action :set_product, only: %i[show]
+  before_action :set_product, only: %i[show edit]
   def index
   end
 
@@ -8,6 +8,9 @@ class Admins::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+  end
+
+  def edit
   end
 
   def create
