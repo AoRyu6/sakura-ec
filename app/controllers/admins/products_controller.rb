@@ -1,5 +1,5 @@
 class Admins::ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update]
+  before_action :set_product, only: %i[show edit update destroy]
   def index
   end
 
@@ -29,6 +29,12 @@ class Admins::ProductsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @product.destroy!
+
+    redirect_to admins_products_path, notice: '商品を削除しました'
   end
 
   private
