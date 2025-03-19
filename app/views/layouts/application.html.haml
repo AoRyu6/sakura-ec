@@ -16,6 +16,5 @@
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
   %body
     .container.mt-4
-      -# - if notice
       = render 'layouts/flash'
       = yield
