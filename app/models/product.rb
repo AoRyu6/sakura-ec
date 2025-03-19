@@ -11,6 +11,5 @@
 #
 class Product < ApplicationRecord
   validates :name, presence: true
-  validates :description, presence: true
-  validates :price_before_tax, presence: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
+  validates :price_before_tax, allow_nil: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
 end
