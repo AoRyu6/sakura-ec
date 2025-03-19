@@ -42,11 +42,11 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
-  gem 'erb_lint', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
 
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'haml_lint', require: false
   gem 'html2haml'
   gem 'rspec-rails'
 end
