@@ -41,6 +41,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
+  gem 'erb_lint', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
 end
 
