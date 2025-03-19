@@ -1,5 +1,5 @@
 class Admins::ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit]
+  before_action :set_product, only: %i[show edit update]
   def index
   end
 
@@ -20,6 +20,14 @@ class Admins::ProductsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
 
+    end
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to admins_product_path(@product), notice: '商品を更新しました'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
