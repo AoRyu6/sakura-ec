@@ -6,6 +6,7 @@ gem 'devise', git: 'https://github.com/heartcombo/devise', branch: 'main' # NOTE
 gem 'devise-i18n'
 gem 'haml-rails'
 gem 'jsbundling-rails'
+gem 'pagy'
 gem 'pg'
 gem 'propshaft'
 gem 'puma'
