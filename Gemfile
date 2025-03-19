@@ -48,6 +48,8 @@ group :development, :test do
   gem 'faker'
   gem 'haml_lint', require: false
   gem 'html2haml'
+  gem 'pg_query'
+  gem 'prosopite'
   gem 'rspec-rails'
 end
 
