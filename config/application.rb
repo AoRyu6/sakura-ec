@@ -46,5 +46,7 @@ module SakuraEc
                        request_specs: false,
                        view_specs: false
     end
+
+    config.active_record.strict_loading_by_default = true
   end
 end
