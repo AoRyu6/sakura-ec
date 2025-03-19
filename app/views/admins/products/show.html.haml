@@ -1,0 +1,9 @@
+.container
+  .d-flex.justify-content-end.align-items-center.gap-3
+    = link_to '編集', '#', class: 'nav-link'
+    = link_to '削除', '#', data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger'
+  %h1 商品
+
+  %span= @product.name
+  %span= @product.description
+  %span= @product.price_before_tax
