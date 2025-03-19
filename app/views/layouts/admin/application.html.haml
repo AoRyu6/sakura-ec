@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+    %title= content_for(:title) || 'Sakura-Market'
+    %meta{ content: 'width=device-width,initial-scale=1', name: 'viewport' }
+    %meta{ content: 'yes', name: 'apple-mobile-web-app-capable' }
+    %meta{ content: 'yes', name: 'mobile-web-app-capable' }
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{ href: '/icon.png', rel: 'icon', type: 'image/png' }
+    %link{ href: '/icon.svg', rel: 'icon', type: 'image/svg+xml' }
+    %link{ href: '/icon.png', rel: 'apple-touch-icon' }
+    = stylesheet_link_tag :app, 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+  %body
+    %header.navbar.navbar-expand-sm.navbar-light.bg-light
+      .container.d-flex
+        = link_to 'さくらマーケット', admins_root_path, class: 'navbar-brand mr-auto'
+        .container.justify-content-center.align-items-centerr
+        - if admin_signed_in?
+          .dropdown
+            = button_tag current_admin.email, class: 'dropdown-toggle nav-link', data: { 'bs-toggle': 'dropdown' }
+            %ul.dropdown-menu
+              %li.dropdown-item.d-flex.justify-content-center
+                = button_to 'ログアウト', destroy_admin_session_path, data: { turbo_confirm: '本当にログアウトしますか?' }, class: 'nav-link', method: :delete
+        - else
+          = link_to 'ログイン', new_admin_session_path, class: 'nav-link'
+
+    .container.mt-4
+      = render 'layouts/flash'
+      = yield
