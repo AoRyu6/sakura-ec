@@ -119,6 +119,5 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: |
-          cp config/database.yml.sample config/database.yml
           bin/rails db:prepare
           bundle exec rspec
