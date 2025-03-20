@@ -6,4 +6,4 @@
 
   %span= @product.name
   %span= @product.description
-  %span= @product.price_before_tax
+  %span= number_to_currency(@product.price_before_tax)
