@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'active_storage_validations'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise', git: 'https://github.com/heartcombo/devise', branch: 'main' # NOTE: deviseがまだRails8に対応していないため。Rails8対応版がリリースされたら指定をなくす
