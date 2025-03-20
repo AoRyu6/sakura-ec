@@ -9,3 +9,5 @@
   %span= number_to_currency(@product.price_before_tax)
   - if @product.image.attached?
     = image_tag @product.image
+  - else
+    = image_tag 'no_image.png'
