@@ -17,11 +17,11 @@ class Admins::ProductsController < Admins::ApplicationController
 
   def create
     @product = Product.new(product_params)
+
     if @product.save
       redirect_to admins_products_path, notice: '商品を登録しました'
     else
       render :new, status: :unprocessable_entity
-
     end
   end
 
