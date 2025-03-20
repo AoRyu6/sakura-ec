@@ -36,7 +36,7 @@ class Admins::ProductsController < Admins::ApplicationController
   def destroy
     @product.destroy!
 
-    redirect_to admins_products_path, notice: '商品を削除しました'
+    redirect_to admins_products_path, status: :see_other, notice: '商品を削除しました'
   end
 
   private
