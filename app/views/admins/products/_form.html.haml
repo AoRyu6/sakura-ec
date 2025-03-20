@@ -2,4 +2,5 @@
   = form.input :name
   = form.input :price_before_tax
   = form.input :description, as: :text, input_html: { rows: 8 }
+  = form.input :image, as: :file, input_html: { accept: 'image/jpeg,image/png' }
   = form.button :submit, class: 'btn btn-primary'
