@@ -1,0 +1,9 @@
+.container
+  .d-flex.justify-content-end.align-items-center.gap-3
+    = link_to '編集', edit_admins_product_path(@product), class: 'nav-link'
+    = button_to '削除', admins_product_path(@product), data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger', method: :delete
+  %h1 商品
+
+  %span= @product.name
+  %span= @product.description
+  %span= number_to_currency(@product.price_before_tax)

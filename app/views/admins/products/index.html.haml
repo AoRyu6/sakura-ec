@@ -1,0 +1,8 @@
+%h1 商品一覧
+
+- @products.each do |product|
+  %ul
+    %li= link_to product.name, admins_product_path(product)
+
+.mt-4
+  != pagy_bootstrap_nav(@pagy)
