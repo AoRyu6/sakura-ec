@@ -7,3 +7,7 @@
   %span= @product.name
   %span= @product.description
   %span= number_to_currency(@product.price_before_tax)
+  - if @product.image.attached?
+    = image_tag @product.image.variant(:thumbnail)
+  - else
+    = image_tag 'no_image.png'

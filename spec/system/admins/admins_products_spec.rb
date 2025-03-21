@@ -72,6 +72,24 @@ RSpec.describe 'Admins::Products', type: :system do
 
         expect(page).to have_current_path admins_products_path
       end
+
+      it '商品名が入力されていない場合、エラーメッセージが表示されること' do
+        visit new_admins_product_path
+
+        click_button '登録する'
+
+        expect(page).to have_content '商品名を入力してください'
+      end
+
+      it '25MB以上の画像がアップロードされた場合、バリデーションエラーが出ること' do
+        visit new_admins_product_path
+
+        fill_in '商品名', with: 'りんご'
+        attach_file '画像', file_fixture('30MB.png')
+        click_button '登録する'
+
+        expect(page).to have_content '商品画像は25MB以下にしてください'
+      end
     end
   end
 
@@ -88,7 +106,6 @@ RSpec.describe 'Admins::Products', type: :system do
         click_link '編集'
 
         fill_in '商品名', with: 'みかん'
-
         click_button '更新する'
 
         expect(page).to have_content '商品を更新しました'

@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'active_storage_validations'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise', git: 'https://github.com/heartcombo/devise', branch: 'main' # NOTE: deviseがまだRails8に対応していないため。Rails8対応版がリリースされたら指定をなくす
 gem 'devise-i18n'
 gem 'haml-rails'
+gem 'image_processing'
 gem 'jsbundling-rails'
 gem 'pagy'
 gem 'pg'
@@ -17,8 +19,6 @@ gem 'stimulus-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
-
-# gem "image_processing", "~> 1.2"
 
 group :development, :test do
   gem 'brakeman', require: false

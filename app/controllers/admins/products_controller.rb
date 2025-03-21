@@ -17,11 +17,11 @@ class Admins::ProductsController < Admins::ApplicationController
 
   def create
     @product = Product.new(product_params)
+
     if @product.save
       redirect_to admins_products_path, notice: '商品を登録しました'
     else
       render :new, status: :unprocessable_entity
-
     end
   end
 
@@ -36,7 +36,7 @@ class Admins::ProductsController < Admins::ApplicationController
   def destroy
     @product.destroy!
 
-    redirect_to admins_products_path, notice: '商品を削除しました'
+    redirect_to admins_products_path, status: :see_other, notice: '商品を削除しました'
   end
 
   private
@@ -46,6 +46,6 @@ class Admins::ProductsController < Admins::ApplicationController
   end
 
   def product_params
-    params.expect(product: %i[name price_before_tax description])
+    params.expect(product: %i[name price_before_tax description image])
   end
 end
