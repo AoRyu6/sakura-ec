@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -7,6 +9,7 @@ class ApplicationController < ActionController::Base
 
     def n_plus_one_detection
       Prosopite.scan
+      Prosopite.raise = true
       yield
     ensure
       Prosopite.finish
