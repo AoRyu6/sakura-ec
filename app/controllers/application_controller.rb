@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
     def n_plus_one_detection
       Prosopite.scan
-      Prosopite.raise = true
       yield
+      Prosopite.raise = true
     ensure
       Prosopite.finish
     end
