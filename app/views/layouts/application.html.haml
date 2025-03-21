@@ -24,10 +24,10 @@
           .d-flex.justify-content-end.navbar-nav.gap-4.ms-auto
             - if user_signed_in?
               .dropdown
-                = button_tag current_user.name, class: 'dropdown-toggle nav-link', data: { 'bs-toggle': 'dropdown' }
+                = button_tag current_user.email, class: 'dropdown-toggle nav-link', data: { 'bs-toggle': 'dropdown' }
                 %ul.dropdown-menu
                   %li.dropdown-item.d-flex.justify-content-center
-                    = link_to 'マイページ', mypage_books_path, class: 'nav-link'
+                    = link_to '日記を見る', '#', class: 'nav-link'
                   %li.dropdown-item.d-flex.justify-content-center
                     = link_to 'アカウント編集', edit_user_registration_path, class: 'nav-link'
                   %li.dropdown-item.d-flex.justify-content-center
