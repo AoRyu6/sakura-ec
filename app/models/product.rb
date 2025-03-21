@@ -10,7 +10,9 @@
 #  updated_at       :datetime         not null
 #
 class Product < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumbnail, resize_to_limit: [600, 600]
+  end
 
   ACCEPTED_CONTENT_TYPES = %w[image/png image/jpeg image/gif image/tiff].freeze
 
