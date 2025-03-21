@@ -15,6 +15,22 @@
     = stylesheet_link_tag :app, 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
   %body
+    %header.navbar.navbar-expand-sm.navbar-light.bg-light-green
+      .container
+        = link_to 'さくらマーケット', root_path, class: 'navbar-brand text-white'
+        - if user_signed_in?
+          %nav
+            %ul.list-unstyled.navbar-nav.d-flex.align-items-center.gap-5
+              %li.nav-item= link_to '日記を見る', diaries_path, class: 'nav-link text-white'
+              %li.nav-item= link_to 'お買い物', root_path, class: 'nav-link text-white'
+              %li.nav-item= link_to 'ショッピングカート', '#', class: 'nav-link text-white'
+          %nav
+            = button_to 'ログアウト', destroy_user_session_path, data: { turbo_confirm: '本当にログアウトしますか？' }, class: 'nav-link text-white', method: :delete
+        - else
+          %nav
+            %ul.navbar-nav.d-flex.align-items-center
+              %li.nav-item= link_to 'ログイン', new_user_session_path, class: 'nav-link text-white'
+              %li.nav-item= link_to '新規登録', new_user_registration_path, class: 'nav-link text-white'
     .container.mt-4
       = render 'layouts/flash'
       = yield
