@@ -1,13 +1,30 @@
-.container
-  .d-flex.justify-content-end.align-items-center.gap-3
-    = link_to '編集', edit_admins_product_path(@product), class: 'nav-link'
-    = button_to '削除', admins_product_path(@product), data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger', method: :delete
-  %h1 商品
+.container.mt-4
+  .card
+    .card-header.bg-light
+      .d-flex.justify-content-between.align-items-center
+        %h1 商品詳細
+        .d-flex.gap-2
+          = link_to '編集', edit_admins_product_path(@product), class: 'btn btn-outline-primary'
+          = button_to '削除', admins_product_path(@product), data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger', method: :delete
 
-  %span= @product.name
-  %span= @product.description
-  %span= number_to_currency(@product.price_before_tax)
-  - if @product.image.attached?
-    = image_tag @product.image.variant(:thumbnail)
-  - else
-    = image_tag 'no_image.png'
+    .card-body
+      .row
+        .col-md-4.text-center.mt-3.mt-md-0
+          - if @product.image.attached?
+            = image_tag @product.image.variant(:thumbnail), class: 'img-fluid rounded'
+          - else
+            = image_tag 'no_image.png', class: 'img-fluid rounded'
+
+        .col-md-8
+          %h2.card-title= @product.name
+          .card-text.mt-3
+            - if @product.description.present?
+              %p= @product.description
+            - else
+              %p.text-muted 商品説明がありません
+          .text-dark.mt-3.fs-4
+            %span
+              - if @product.price_before_tax.present?
+                = number_to_currency(@product.price_before_tax)
+              - else
+                %span.text-muted 価格未設定
