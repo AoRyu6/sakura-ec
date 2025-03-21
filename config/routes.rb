@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'products#index'
+  resources :products, only: :show
 
   draw(:admin)
 
