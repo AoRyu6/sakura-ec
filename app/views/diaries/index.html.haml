@@ -1,0 +1,5 @@
+- if user_signed_in?
+  %span= current_user.name
+  %nav
+    %ul
+      %li= link_to 'プロフィールを編集する', edit_user_registration_path

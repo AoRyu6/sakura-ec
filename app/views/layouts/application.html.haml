@@ -21,7 +21,7 @@
         - if user_signed_in?
           %nav
             %ul.list-unstyled.navbar-nav.d-flex.align-items-center.gap-5
-              %li.nav-item= link_to '日記を見る', '#', class: 'nav-link text-white'
+              %li.nav-item= link_to '日記を見る', diaries_path, class: 'nav-link text-white'
               %li.nav-item= link_to 'お買い物', root_path, class: 'nav-link text-white'
               %li.nav-item= link_to 'ショッピングカート', '#', class: 'nav-link text-white'
           %nav
