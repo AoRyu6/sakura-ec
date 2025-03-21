@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'products#index'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   draw(:admin)
 
+  resources :products, only: :show
   resources :diaries
 
   get 'up' => 'rails/health#show', as: :rails_health_check
