@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :products, only: :show
   resources :diaries
+  resource :carts, only: :show
 
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
