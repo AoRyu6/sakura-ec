@@ -85,7 +85,7 @@ RSpec.describe 'Admins::Products', type: :system do
         visit new_admins_product_path
 
         fill_in '商品名', with: 'りんご'
-        attach_file '画像', file_fixture('100MB.webp')
+        attach_file '画像', file_fixture('30MB.png')
         click_button '登録する'
 
         expect(page).to have_content '商品画像は25MB以下にしてください'
