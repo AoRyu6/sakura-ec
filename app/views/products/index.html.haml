@@ -1,2 +1,15 @@
-%h1 Products#index
-%p Find me in app/views/products/index.html.haml
+.container
+  .row
+    - @products.each do |product|
+      .col-md-4.mb-4
+        .card
+          .card-img-container.p-3
+            - if product.image.attached?
+              = image_tag product.image.variant(:thumbnail), class: 'card-img-top img-fit-contain'
+            - else
+              = image_tag 'no_image.png', class: 'card-img-top bg-light img-fit-contain'
+          .card-body.pt-2
+            = link_to product.name, product_path(product), class: 'text-decoration-none'
+
+  .mt-4
+    != pagy_bootstrap_nav(@pagy)
