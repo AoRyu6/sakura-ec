@@ -1,2 +1,9 @@
-%h1 Products#show
-%p Find me in app/views/products/show.html.haml
+- if @product.image.attached?
+  = image_tag @product.image.variant(:thumbnail), class: 'card-img-top img-fit-contain'
+- else
+  = image_tag 'no_image.png', class: 'card-img-top bg-light img-fit-contain'
+
+%span= @product.name
+-# #TODO - 価格を税込で表示する
+%span= number_to_currency(@product.price_before_tax)
+%div= @product.description
