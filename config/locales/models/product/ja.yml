@@ -6,3 +6,7 @@ ja:
         price_before_tax: "価格（税抜き）"
         description: "商品説明"
         image: "商品画像"
+    errors:
+      messages:
+        content_type_invalid: "は%{authorized_human_content_types}形式でアップロードしてください"
+        file_size_not_less_than: "は%{max}以下にしてください"
