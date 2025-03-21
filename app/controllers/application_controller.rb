@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
+
+  def current_cart
+    if user_signed_in?
+      current_user.cart.presence || current_user.create_cart
+    end
+  end
 
   unless Rails.env.production?
     around_action :n_plus_one_detection
