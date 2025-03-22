@@ -1,0 +1,27 @@
+.container.mt-4
+  .row.g-4
+    %section.col-md-8
+      - if @cart.cart_items.present?
+        - @cart.cart_items.default_order.includes(product: :image_attachment).each do |cart_item|
+          .card.mb-3.shadow-sm.border-0
+            .row.g-0.align-items-center
+              .col-md-3.p-3
+                - if cart_item.product.image.attached?
+                  = image_tag(cart_item.product.image.variant(:thumbnail), class: 'img-fluid rounded', alt: "#{cart_item.prodcut.name} の表紙")
+                - else
+                  = image_tag 'no_image.png', class: 'img-fluid rounded', alt: '画像なし'
+              .col-md-9
+                .card-body.d-flex.flex-column
+                  %h2.card-title
+                    = link_to cart_item.product.name, product_path(cart_item.product), class: 'text-decoration-none text-dark'
+                  %p.card-text.mt-2
+                    %span.text-dark.fw-bold
+                      = number_to_currency(cart_item.product&.price_before_tax.to_i)
+                  = button_to '削除', cart_cart_item_path(cart_item), method: :delete, class: 'btn text-primary', data: { turbo_confirm: 'カートから削除しますか？' }
+
+      - else
+        .text-center.py-5.mx-auto.col-md-10
+          %i.bi.bi-cart.fs-1.text-muted.mb-3.d-block
+          %h2 カートに商品が入っていません
+          %p.text-muted 商品を追加してお買い物をお楽しみください
+          = link_to '商品一覧へ', root_path, class: 'btn btn-primary'

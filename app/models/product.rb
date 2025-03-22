@@ -13,6 +13,7 @@ class Product < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
   end
+  has_many :cart_items, dependent: :destroy
 
   ACCEPTED_CONTENT_TYPES = %w[image/png image/jpeg image/gif image/tiff].freeze
 
