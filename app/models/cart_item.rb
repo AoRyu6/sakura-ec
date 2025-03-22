@@ -21,4 +21,6 @@
 class CartItem < ApplicationRecord
   belongs_to :product
   belongs_to :cart
+
+  scope :default_order, -> { order(created_at: :desc) }
 end
