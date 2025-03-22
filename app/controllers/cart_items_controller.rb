@@ -14,6 +14,6 @@ class CartItemsController < ApplicationController
 
   def destroy
     current_cart.cart_items.find(params.expect(:id)).destroy!
-    redirect_to cart_path, notice: 'カートから商品を削除しました'
+    redirect_to cart_path, status: :see_other, notice: 'カートから商品を削除しました'
   end
 end
