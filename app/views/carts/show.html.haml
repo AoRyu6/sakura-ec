@@ -1,2 +1,20 @@
-%h1 Carts#show
-%p Find me in app/views/carts/show.html.haml
+.container.mt-4
+  .row.g-4
+    %section.col-md-8
+      - if @cart.cart_items.present?
+        - @cart.cart_items.default_order.includes(product: :image_attachment).each do |cart_item|
+          .card.mb-3.shadow-sm.border-0
+            .row.g-0.align-items-center
+              .col-md-3.p-3
+                - if cart_item.product.image.attached?
+                  = image_tag(cart_item.product.image.variant(:thumbnail), class: 'img-fluid rounded', alt: "#{cart_item.prodcut.name} の表紙")
+                - else
+                  = image_tag 'no_image.png', class: 'img-fluid rounded', alt: '画像なし'
+              .col-md-9
+                .card-body.d-flex.flex-column
+                  %h2.card-title
+                    = link_to cart_item.product.name, product_path(cart_item.product), class: 'text-decoration-none text-dark'
+                  %p.card-text.mt-2
+                    %span.text-dark.fw-bold
+                      = number_to_currency(cart_item.product&.price_before_tax.to_i)
+                  = button_to '削除', '#', method: :delete, class: 'btn text-primary', data: { turbo_confirm: 'カートから削除しますか？' }
