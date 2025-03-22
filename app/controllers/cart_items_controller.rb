@@ -11,4 +11,9 @@ class CartItemsController < ApplicationController
       redirect_to product, alert: 'カートに商品を追加できませんでした'
     end
   end
+
+  def destroy
+    current_cart.cart_items.find(params.expect(:id)).destroy!
+    redirect_to cart_path, notice: 'カートから商品を削除しました'
+  end
 end
