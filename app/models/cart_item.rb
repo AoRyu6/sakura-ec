@@ -19,8 +19,6 @@
 #  fk_rails_...  (product_id => products.id)
 #
 class CartItem < ApplicationRecord
-  include TaxCalculable
-
   belongs_to :product
   belongs_to :cart
 
