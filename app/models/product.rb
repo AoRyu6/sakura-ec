@@ -8,6 +8,7 @@
 #  price_cents    :integer
 #  price_currency :string           default("JPY"), not null
 #  published      :boolean          default(FALSE), not null
+#  row_order      :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
