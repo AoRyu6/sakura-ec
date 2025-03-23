@@ -1,0 +1,39 @@
+require 'rails_helper'
+
+RSpec.describe Product, type: :model do
+  describe '公開機能' do
+    it '公開するには商品名,税抜き価格商品画像,商品説明が必要であること' do
+      product = Product.new(
+        name: 'りんご',
+        price_before_tax: 100,
+        image: Rails.root.join('spec/fixtures/files/product.png').open,
+        description: '新鮮なりんごです。',
+        published: true
+      )
+      product.valid?
+
+      expect(product).to be_valid
+    end
+
+    it '商品説明がなければ公開できないこと' do
+      product = build(:product, :published, description: nil)
+      product.valid?
+
+      expect(product.errors.messages[:description]).to include('を入力してください')
+    end
+
+    it '税抜き価格がなければ公開できないこと' do
+      product = build(:product, :published, price_before_tax: nil)
+      product.valid?
+
+      expect(product.errors.messages[:price_before_tax]).to include('は0以上の値にしてください')
+    end
+
+    it '商品画像がなければ公開できないこと' do
+      product = build(:product, :published, image: nil)
+      product.valid?
+
+      expect(product.errors.messages[:image]).to include('を添付してください')
+    end
+  end
+end
