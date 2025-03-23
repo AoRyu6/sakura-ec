@@ -2,19 +2,22 @@
 #
 # Table name: products
 #
-#  id               :bigint           not null, primary key
-#  description      :text             default(""), not null
-#  name             :string           not null
-#  price_before_tax :integer
-#  published        :boolean          default(FALSE), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id             :bigint           not null, primary key
+#  description    :text             default(""), not null
+#  name           :string           not null
+#  price_cents    :integer
+#  price_currency :string           default("JPY"), not null
+#  published      :boolean          default(FALSE), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 class Product < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
   end
   has_many :cart_items, dependent: :destroy
+
+  monetize :price_cents
 
   ACCEPTED_CONTENT_TYPES = %w[image/png image/jpeg image/gif image/tiff].freeze
 

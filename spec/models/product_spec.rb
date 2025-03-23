@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id             :bigint           not null, primary key
+#  description    :text             default(""), not null
+#  name           :string           not null
+#  price_cents    :integer
+#  price_currency :string           default("JPY"), not null
+#  published      :boolean          default(FALSE), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
