@@ -31,13 +31,14 @@ RSpec.describe 'Products', type: :system do
 
   describe '商品詳細機能' do
     context '商品が公開されている場合' do
-      it '商品名、商品の説明が表示されていること' do
-        product = create(:product, :published, name: 'りんご', description: '新鮮なりんごです。')
+      it '商品名、商品の説明。税込価格がが表示されていること' do
+        product = create(:product, :published, name: 'りんご', description: '新鮮なりんごです。', price: 1000)
 
         visit product_path(product)
 
         expect(page).to have_content('りんご')
         expect(page).to have_content('新鮮なりんごです。')
+        expect(page).to have_content('1,080円 (税込)')
       end
     end
   end

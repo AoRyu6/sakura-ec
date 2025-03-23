@@ -12,6 +12,8 @@
 #  updated_at     :datetime         not null
 #
 class Product < ApplicationRecord
+  include TaxCalculable
+
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
   end

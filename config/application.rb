@@ -41,6 +41,7 @@ module SakuraEc
 
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
+    config.i18n.load_path += Rails.root.glob("config/locales/**/*.{rb,yml}")
 
     config.generators do |g|
       g.helper false
