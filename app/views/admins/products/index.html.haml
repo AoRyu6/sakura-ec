@@ -1,8 +1,37 @@
 %h1 商品一覧
 
-- @products.each do |product|
-  %ul
-    %li= link_to product.name, admins_product_path(product)
+%table.table.table-striped.table-hover.mt-3
+  %thead
+    %tr
+      %th.text-center 商品画像
+      %th.text-center 商品名
+      %th.text-center 価格(税抜き)
+      %th.text-center 価格(税込)
+      %th.text-center ステータス
+  %tbody{ data: { controller: 'sortable' } }
+    - @products.sorted_by_rank.default_order.preload(image_attachment: :blob).each do |product|
+      %tr.align-middle{ data: { sortable_url: admins_product_position_path(product) } }
+        %td.text-center
+          - if product.image.attached?
+            = image_tag product.image.variant(:icon)
+          - else
+            = image_tag 'no_image.png', width: 50, height: 50
+        %td.text-center.text-decoration-none= link_to product.name, admins_product_path(product)
+        %td.text-center
+          - if product.price.present?
+            = product.price.format
+          - else
+            未設定
+        %td.text-center
+          - if product.price.present?
+            = product.price_with_tax.format
+          - else
+            未設定
+        %td.text-center
+          - if product.published?
+            %span.badge.bg-success.text-white 公開中
+          - else
+            %span.badge.bg-secondary.text-white 非公開
 
 .mt-4
   != pagy_bootstrap_nav(@pagy)

@@ -9,16 +9,28 @@ RSpec.describe 'Admins::Products', type: :system do
         sign_in admin
       end
 
-      it '商品一覧が表示されること' do
-        create(:product, name: 'りんご')
-        create(:product, name: 'みかん')
+      it '商品名、価格(税抜き)、価格(税込), ステータス、が表示されること' do
+        create(:product, :published, name: 'りんご', price: 100)
 
         visit admins_root_path
 
         click_link '商品一覧'
 
         expect(page).to have_content 'りんご'
-        expect(page).to have_content 'みかん'
+        expect(page).to have_content '100円'
+        expect(page).to have_content '108円'
+        expect(page).to have_content '公開中'
+      end
+
+      it '商品の価格が設定されておらず、非公開の場合、未設定と非公開が表示されること' do
+        create(:product, price: nil, published: false)
+
+        visit admins_root_path
+
+        click_link '商品一覧'
+
+        expect(page).to have_content '未設定'
+        expect(page).to have_content '非公開'
       end
     end
 
