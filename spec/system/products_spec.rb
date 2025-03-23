@@ -12,6 +12,18 @@ RSpec.describe 'Products', type: :system do
         expect(page).to have_content('りんご')
         expect(page).to have_content('みかん')
       end
+
+      it '商品がランク順に表示されていること' do
+        create(:product, :published, name: 'りんご', row_order: 0)
+        create(:product, :published, name: 'みかん', row_order: 1)
+
+        visit root_path
+
+        expect(page).to have_content('りんご')
+        expect(page).to have_content('みかん')
+
+        expect(page.body.index('りんご')).to be < page.body.index('みかん')
+      end
     end
 
     context '商品が非公開の場合' do
