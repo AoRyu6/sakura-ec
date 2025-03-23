@@ -15,6 +15,7 @@ gem 'propshaft'
 gem 'puma'
 gem 'rails', '~> 8.0.2'
 gem 'rails-i18n'
+gem 'ranked-model'
 gem 'simple_form'
 gem 'stimulus-rails'
 gem 'thruster', require: false
