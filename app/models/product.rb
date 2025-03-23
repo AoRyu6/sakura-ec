@@ -2,15 +2,18 @@
 #
 # Table name: products
 #
-#  id               :bigint           not null, primary key
-#  description      :text             default(""), not null
-#  name             :string           not null
-#  price_before_tax :integer
-#  published        :boolean          default(FALSE), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id             :bigint           not null, primary key
+#  description    :text             default(""), not null
+#  name           :string           not null
+#  price_cents    :integer
+#  price_currency :string           default("JPY"), not null
+#  published      :boolean          default(FALSE), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 class Product < ApplicationRecord
+  include TaxCalculable
+
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
   end
@@ -18,12 +21,13 @@ class Product < ApplicationRecord
 
   ACCEPTED_CONTENT_TYPES = %w[image/png image/jpeg image/gif image/tiff].freeze
 
+  monetize :price_cents, allow_nil: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
+
   validates :name, presence: true
-  validates :price_before_tax, allow_nil: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
   validates :image, content_type: ACCEPTED_CONTENT_TYPES, size: { less_than: 25.megabytes }
   with_options if: :published? do
     validates :name, presence: true
-    validates :price_before_tax, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
     validates :description, presence: true
     validate :image_attached
   end

@@ -1,6 +1,6 @@
 = simple_form_for([:admins, product]) do |form|
   = form.input :name
-  = form.input :price_before_tax
+  = form.input :price
   = form.input :description, as: :text, input_html: { rows: 8 }
   = form.input :image, as: :file, input_html: { accept: Product::ACCEPTED_CONTENT_TYPES.join(',') }
   = form.input :published, as: :boolean
