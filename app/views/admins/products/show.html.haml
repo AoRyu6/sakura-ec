@@ -8,6 +8,7 @@
           = button_to '削除', admins_product_path(@product), data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger', method: :delete
 
     .card-body
+
       .row
         .col-md-4.text-center.mt-3.mt-md-0
           - if @product.image.attached?
@@ -17,6 +18,11 @@
 
         .col-md-8
           %h2.card-title= @product.name
+          - if @product.published?
+            %span.badge.bg-success.text-white.px-2 公開済み
+          - else
+            %span.badge.bg-secondary.text-white.px-2 未公開
+
           .card-text.mt-3
             - if @product.description.present?
               %p= @product.description
