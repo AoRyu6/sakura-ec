@@ -13,6 +13,7 @@
 #  updated_at     :datetime         not null
 #
 class Product < ApplicationRecord
+  include RankedModel
   include TaxCalculable
 
   has_one_attached :image do |attachable|
@@ -26,6 +27,7 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
   validates :image, content_type: ACCEPTED_CONTENT_TYPES, size: { less_than: 25.megabytes }
+  validates :row_order_position, numericality: { only_integer: true }, allow_nil: true
   with_options if: :published? do
     validates :name, presence: true
     validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
