@@ -4,5 +4,7 @@ devise_for :admins, skip: %i[confirmations],
 
 namespace :admins do
   root 'home#index'
-  resources :products
+  resources :products do
+    resource :position, only: :update, module: :products
+  end
 end
