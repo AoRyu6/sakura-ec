@@ -20,6 +20,7 @@ class Product < ApplicationRecord
 
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
+    attachable.variant :icon, resize_to_fit: [50, 50]
   end
   has_many :cart_items, dependent: :destroy
 
