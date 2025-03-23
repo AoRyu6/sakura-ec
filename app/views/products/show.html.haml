@@ -5,7 +5,7 @@
 
 %span= @product.name
 -# #TODO - 価格を税込で表示する
-%span= number_to_currency(@product.price_before_tax)
+%span= @product.price.format
 %div= @product.description
 - if user_signed_in?
   = button_to 'カートに追加', cart_cart_items_path(product_id: @product.id), class: 'btn btn-primary'

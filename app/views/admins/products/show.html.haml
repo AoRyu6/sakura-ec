@@ -27,6 +27,6 @@
           .text-dark.mt-3.fs-4
             %span
               - if @product.price.present?
-                = number_to_currency(@product.price_before_tax)
+                = @product.price.format
               - else
                 %span.text-muted.fs-6 価格未設定
