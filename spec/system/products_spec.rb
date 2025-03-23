@@ -31,7 +31,7 @@ RSpec.describe 'Products', type: :system do
 
   describe '商品詳細機能' do
     context '商品が公開されている場合' do
-      it '商品の詳細が表示されていること' do
+      it '商品名、商品の説明が表示されていること' do
         product = create(:product, :published, name: 'りんご', description: '新鮮なりんごです。')
 
         visit product_path(product)
