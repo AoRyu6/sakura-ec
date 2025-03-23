@@ -7,7 +7,7 @@
             .row.g-0.align-items-center
               .col-md-3.p-3
                 - if cart_item.product.image.attached?
-                  = image_tag(cart_item.product.image.variant(:thumbnail), class: 'img-fluid rounded', alt: "#{cart_item.prodcut.name} の表紙")
+                  = image_tag(cart_item.product.image.variant(:thumbnail), class: 'img-fluid rounded', alt: "#{cart_item.product.name} の表紙")
                 - else
                   = image_tag 'no_image.png', class: 'img-fluid rounded', alt: '画像なし'
               .col-md-9
