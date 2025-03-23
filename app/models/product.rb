@@ -23,6 +23,5 @@ class Product < ApplicationRecord
   validates :image, content_type: ACCEPTED_CONTENT_TYPES, size: { less_than: 25.megabytes }
 
   scope :default_order, -> { order(created_at: :desc, id: :desc) }
-  # TODO: - このスコープを使って、公開中の商品のみを取得するように修正する
-  scope :published, -> {}
+  scope :published, -> { where(published: true) }
 end
