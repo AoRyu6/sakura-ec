@@ -3,7 +3,7 @@ ja:
     attributes:
       product:
         name: "商品名"
-        price_before_tax: "価格（税抜き）"
+        price: "価格（税抜き）"
         description: "商品説明"
         image: "商品画像"
         published: "公開する"

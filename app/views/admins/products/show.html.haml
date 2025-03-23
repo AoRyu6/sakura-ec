@@ -26,7 +26,7 @@
               %p.text-muted 商品説明がありません
           .text-dark.mt-3.fs-4
             %span
-              - if @product.price_before_tax.present?
+              - if @product.price.present?
                 = number_to_currency(@product.price_before_tax)
               - else
                 %span.text-muted.fs-6 価格未設定
