@@ -38,7 +38,7 @@ RSpec.describe 'Admins::Products', type: :system do
       end
 
       it '商品詳細が表示されること' do
-        create(:product, name: 'りんご', description: '青森県産', price_before_tax: 200)
+        create(:product, name: 'りんご', description: '青森県産', price: 200)
 
         visit admins_root_path
 

@@ -17,16 +17,15 @@ class Product < ApplicationRecord
   end
   has_many :cart_items, dependent: :destroy
 
-  monetize :price_cents
-
   ACCEPTED_CONTENT_TYPES = %w[image/png image/jpeg image/gif image/tiff].freeze
 
+  monetize :price_cents, allow_nil: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
+
   validates :name, presence: true
-  validates :price, allow_nil: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
   validates :image, content_type: ACCEPTED_CONTENT_TYPES, size: { less_than: 25.megabytes }
   with_options if: :published? do
     validates :name, presence: true
-    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, message: 'は0以上の値にしてください' }
     validates :description, presence: true
     validate :image_attached
   end
