@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Products', type: :system do
   describe '商品一覧機能' do
     before do
-      create(:product, name: 'りんご')
-      create(:product, name: 'みかん')
+      create(:product, :published, name: 'りんご')
+      create(:product, :published, name: 'みかん')
     end
 
     it '商品が一覧で表示されていること' do
@@ -17,7 +17,7 @@ RSpec.describe 'Products', type: :system do
 
   describe '商品詳細機能' do
     it '商品の詳細が表示されていること' do
-      product = create(:product, name: 'りんご', description: '新鮮なりんごです。')
+      product = create(:product, :published, name: 'りんご', description: '新鮮なりんごです。')
 
       visit product_path(product)
 

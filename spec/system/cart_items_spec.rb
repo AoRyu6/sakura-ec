@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'CartItems', type: :system do
   describe 'カートに商品を追加する機能' do
     let(:user) { create(:user) }
-    let(:product) { create(:product, name: 'りんご') }
+    let(:product) { create(:product, :published, name: 'りんご') }
 
     before do
       sign_in user
