@@ -16,6 +16,8 @@ class Product < ApplicationRecord
   include RankedModel
   include TaxCalculable
 
+  ranks :row_order
+
   has_one_attached :image do |attachable|
     attachable.variant :thumbnail, resize_to_limit: [600, 600]
   end
@@ -36,6 +38,7 @@ class Product < ApplicationRecord
   end
 
   scope :default_order, -> { order(created_at: :desc, id: :desc) }
+  scope :sorted_by_rank, -> { rank(:row_order) }
   scope :published, -> { where(published: true) }
 
   private
