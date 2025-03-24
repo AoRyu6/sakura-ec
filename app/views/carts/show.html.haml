@@ -2,7 +2,8 @@
   .row.g-4
     %section.col-md-8
       - if @cart.cart_items.present?
-        - @cart.cart_items.default_order.includes(product: :image_attachment).each do |cart_item|
+        -# #TODO - viewにロジックを持ちたくない
+        - @cart.cart_items.default_order.preload(product: { image_attachment: :blob }).each do |cart_item|
           .card.mb-3.shadow-sm.border-0
             .row.g-0.align-items-center
               .col-md-3.p-3
