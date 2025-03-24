@@ -2,7 +2,8 @@
   .row.g-4
     %section.col-md-8
       - if @cart.cart_items.present?
-        - @cart.cart_items.default_order.includes(product: :image_attachment).each do |cart_item|
+        -# #TODO - viewにロジックを持ちたくない
+        - @cart.cart_items.default_order.preload(product: { image_attachment: :blob }).each do |cart_item|
           .card.mb-3.shadow-sm.border-0
             .row.g-0.align-items-center
               .col-md-3.p-3
@@ -24,3 +25,14 @@
           %h2 カートに商品が入っていません
           %p.text-muted 商品を追加してお買い物をお楽しみください
           = link_to '商品一覧へ', root_path, class: 'btn btn-primary'
+
+    - if @cart.cart_items.present?
+      %section.col-md-4
+        .card.shadow-sm.border-0.p-3
+          .d-flex.align-items-center.justify-content-between.w-100.border-bottom.pb-2
+            .fw-bold 合計:
+            -# #TODO - 税金計算は後で実装
+            %span= @cart.total_price.format
+          = button_to orders_path, class: 'btn btn-primary btn-lg w-100 rounded-3 shadow-sm mt-3', data: { turbo_confirm: '注文を確定してもよろしいですか?' } do
+            %i.bi.bi-cart-check.me-2
+            %span 購入する

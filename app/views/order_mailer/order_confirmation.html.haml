@@ -1,0 +1,13 @@
+%h1 注文受付メール
+%span #{@order.user.name}様
+%p ご注文ありがとうございます。 以下の内容で受付けました。
+
+- @order.order_items.default_order.eager_load(:product).each do |order_item|
+  %ul
+    %li
+      = order_item.product.name
+      = order_item.price.format
+
+%hr
+%span 合計金額: #{@order.total_price}
+%hr
