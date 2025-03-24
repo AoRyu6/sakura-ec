@@ -25,4 +25,6 @@ class OrderItem < ApplicationRecord
   belongs_to :product
 
   monetize :price_cents, numericality: { greater_than_or_equal_to: 0 }
+
+  scope :default_order, -> { order(created_at: :asc) }
 end
