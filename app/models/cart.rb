@@ -16,7 +16,36 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Cart < ApplicationRecord
+  include TaxCalculable
+
   belongs_to :user
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
+
+  def total_price
+    # TODO: - 税金関連は後で実装
+    # subtotal =
+    cart_items.eager_load(:product).sum { _1.product.price }
+    # price_with_tax(subtotal)
+  end
+
+  def order!
+    order = user.orders.new
+
+    transaction do
+      add_order_items_to_order(order)
+      if order.order_items.present?
+        order.save!
+        cart_items.destroy_all
+      end
+    end
+  end
+
+  private
+
+  def add_order_items_to_order(order)
+    cart_items.eager_load(:product).each do |cart_item|
+      order.order_items.new(product: cart_item.product, price: cart_item.product.price)
+    end
+  end
 end
