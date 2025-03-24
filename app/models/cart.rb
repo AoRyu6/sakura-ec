@@ -23,10 +23,7 @@ class Cart < ApplicationRecord
   has_many :products, through: :cart_items
 
   def total_price
-    # TODO: - 税金関連は後で実装
-    # subtotal =
     cart_items.eager_load(:product).sum { _1.product.price }
-    # price_with_tax(subtotal)
   end
 
   def order!
@@ -36,6 +33,7 @@ class Cart < ApplicationRecord
       add_order_items_to_order(order)
       if order.order_items.present?
         order.save!
+        OrderMailer.order_confirmation(order).deliver_later
         cart_items.destroy_all
       end
     end

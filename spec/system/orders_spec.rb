@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Orders', type: :system do
   describe '注文機能' do
     context 'ログインしている場合' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, email: 'user@example.com') }
+      let(:product) { create(:product, :published) }
       let(:cart) { create(:cart, user: user) }
 
       before do
@@ -22,6 +23,12 @@ RSpec.describe 'Orders', type: :system do
 
         expect(page).to have_content('注文を受け付けました。メール内容をご確認ください。')
         expect(page).to have_current_path root_path
+
+        perform_enqueued_jobs
+
+        email = ActionMailer::Base.deliveries.last
+        expect(email.subject).to eq '注文を受け付けました'
+        expect(email.to).to eq ['user@example.com']
       end
     end
   end
