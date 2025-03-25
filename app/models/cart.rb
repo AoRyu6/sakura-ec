@@ -25,7 +25,7 @@ class Cart < ApplicationRecord
   SHIPPING_COST = 600
 
   def subtotal_price
-    cart_items.eager_load(:product).sum { _1.product.price }
+    Money.new(cart_items.eager_load(:product).sum { _1.product.price.cents })
   end
 
   def shipping_fee
