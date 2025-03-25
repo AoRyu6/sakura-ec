@@ -1,0 +1,9 @@
+%h1.fs-4 配送先住所一覧
+
+- @shipping_addresses.each do |shipping_address|
+  .card.mb-3
+    .card-body
+      .card-title.fw-bold= shipping_address.recipient_name
+      .card-text #{shipping_address.postal_code} #{shipping_address.city}
+      %div
+        = link_to '配送先を編集する', '#', class: 'nav-link text-primary'

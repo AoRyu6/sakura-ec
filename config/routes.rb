@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: %i[create destroy]
   end
   resources :orders, only: :create
-  resources :shipping_addresses, only: %i[new create edit update destroy]
+  resources :shipping_addresses
 
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

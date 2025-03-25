@@ -1,4 +1,8 @@
 class ShippingAddressesController < ApplicationController
+  def index
+    @shipping_addresses = current_user.shipping_addresses
+  end
+
   def new
     @shipping_address = current_user.shipping_addresses.new
   end
