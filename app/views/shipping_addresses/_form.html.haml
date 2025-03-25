@@ -3,5 +3,5 @@
   = form.input :postal_code, required: true, input_html: { autocomplete: 'postal_code' }
   = form.input :prefecture_id, collection: Prefecture.all.map { |p| [p.name, p.id] }, prompt: '選択してください'
   = form.input :city, required: true, input_html: { autocomplete: 'address' }
-  = form.input :street_address, required: true, input_html: { autocomplete: 'address', placeholder: '例: ○○○マンション101号' }
+  = form.input :street_address, input_html: { autocomplete: 'address', placeholder: '例: ○○○マンション101号' }
   = form.submit class: 'btn btn-primary'
