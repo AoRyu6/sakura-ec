@@ -63,6 +63,7 @@ class Cart < ApplicationRecord
     transaction do
       add_order_items_to_order(order)
       if order.order_items.present?
+        order.price = self.total_price
         order.save!
         OrderMailer.order_confirmation(order).deliver_later
         cart_items.destroy_all
