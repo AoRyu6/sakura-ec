@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   allow_browser versions: :modern
 
+  before_action :authenticate_user!
+
   def current_cart
     if user_signed_in?
       current_user.cart.presence || current_user.create_cart
