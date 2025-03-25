@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'active_hash'
 gem 'active_storage_validations'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
