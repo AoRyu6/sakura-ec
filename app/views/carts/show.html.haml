@@ -33,8 +33,8 @@
             %span 小計:
             %span.text-end= @cart.subtotal_price.format
           .d-flex.align-items-center.justify-content-between.w-100.border-bottom.pb-2.mb-2
-            %span 配送料・手数料:
-            %span.text-end 600円
+            %span 送料:
+            %span.text-end= @cart.shipping_fee.format
           .d-flex.align-items-center.justify-content-between.w-100.pb-2.fw-bold
             %span 合計:
             -# #TODO - 税金計算は後で実装

@@ -22,11 +22,19 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
 
+  SHIPPING_COST = 600
+
   def subtotal_price
     cart_items.eager_load(:product).sum { _1.product.price }
   end
 
-  def total_price
+  def shipping_fee
+    if cart_items.size <= 5
+      Money.new(SHIPPING_COST)
+    else
+      additional_units = ((cart_items.size - 5).to_f / 5).ceil
+      Money.new(SHIPPING_COST + (additional_units * SHIPPING_COST))
+    end
   end
 
   def order!
