@@ -1,5 +1,5 @@
 class ShippingAddressesController < ApplicationController
-  before_action :set_shipping_address, only: %i[edit update]
+  before_action :set_shipping_address, only: %i[edit update destroy]
 
   def index
     @shipping_addresses = current_user.shipping_addresses
@@ -15,8 +15,7 @@ class ShippingAddressesController < ApplicationController
   def create
     @shipping_address = current_user.shipping_addresses.new(shipping_address_params)
     if @shipping_address.save
-      # TODO: - showを実装していないため、root_pathにリダイレクトしている
-      redirect_to root_path, notice: '配送先住所を登録しました'
+      redirect_to shipping_addresses_path, notice: '配送先住所を登録しました'
     else
       render :new, status: :unprocessable_entity, notice: '配送先住所の登録に失敗しました'
     end
@@ -28,6 +27,12 @@ class ShippingAddressesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity, notice: '更新に失敗しました'
     end
+  end
+
+  def destroy
+    @shipping_address.destroy!
+
+    redirect_to shipping_addresses_path, status: :see_other, notice: '配送先住所を削除しました'
   end
 
   private
