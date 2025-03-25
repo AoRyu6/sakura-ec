@@ -1,11 +1,21 @@
-- if @product.image.attached?
-  = image_tag @product.image.variant(:thumbnail), class: 'card-img-top img-fit-contain'
-- else
-  = image_tag 'no_image.png', class: 'card-img-top bg-light img-fit-contain'
+.container.mt-5
+  .row
+    .col-md-5
+      .product-image.mt-4
+        - if @product.image.attached?
+          = image_tag @product.image.variant(:thumbnail), class: 'img-fluid rounded img-fit-contain'
+        - else
+          = image_tag 'no_image.png', class: 'img-fluid rounded bg-light img-fit-contain'
 
-%span= @product.name
-%span= @product.price.format
+    .col-md-7
+      %h2.mt-3.fw-bold= @product.name
+      .text-dark.fs-4= @product.price.format
 
-%div= @product.description
-- if user_signed_in?
-  = button_to 'カートに追加', cart_cart_items_path(product_id: @product.id), class: 'btn btn-primary'
+      .card.shadow-sm.mt-4
+        .card-body
+          %h3.card-title.border-bottom.pb-2 商品説明
+          %p.card-text.mt-3= @product.description
+
+      - if user_signed_in?
+        .d-grid.gap-2.mt-4
+          = button_to 'カートに追加', cart_cart_items_path(product_id: @product.id), class: 'btn btn-primary btn-lg fw-bold'

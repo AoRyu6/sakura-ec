@@ -3,7 +3,7 @@ devise_for :admins, skip: %i[confirmations],
                                    passwords: 'admins/passwords' }
 
 namespace :admins do
-  root 'home#index'
+  root 'products#index'
   resources :products do
     resource :position, only: :update, module: :products
   end

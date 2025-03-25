@@ -14,8 +14,6 @@ RSpec.describe 'Admins::Products', type: :system do
 
         visit admins_root_path
 
-        click_link '商品一覧'
-
         expect(page).to have_content 'りんご'
         expect(page).to have_content '100円'
         expect(page).to have_content '108円'
@@ -26,8 +24,6 @@ RSpec.describe 'Admins::Products', type: :system do
         create(:product, price: nil, published: false)
 
         visit admins_root_path
-
-        click_link '商品一覧'
 
         expect(page).to have_content '未設定'
         expect(page).to have_content '非公開'
@@ -54,8 +50,6 @@ RSpec.describe 'Admins::Products', type: :system do
 
         visit admins_root_path
 
-        click_link '商品一覧'
-
         click_link 'りんご'
 
         expect(page).to have_content 'りんご'
@@ -74,7 +68,7 @@ RSpec.describe 'Admins::Products', type: :system do
       it '商品登録ができること' do
         visit admins_root_path
 
-        click_link '商品登録'
+        click_link '商品新規登録'
 
         fill_in '商品名', with: 'みかん'
 
