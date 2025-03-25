@@ -6,8 +6,8 @@
   %ul
     %li
       = order_item.product.name
-      = order_item.price.format
+      #{order_item.price.format} + (税)
 
 %hr
-%span 合計金額: #{@order.total_price}
+%span 合計金額: #{@order.price}
 %hr
