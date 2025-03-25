@@ -4,7 +4,7 @@
   = image_tag 'no_image.png', class: 'card-img-top bg-light img-fit-contain'
 
 %span= @product.name
-%span #{@product.price_with_tax.format} (税込)
+%span= @product.price.format
 
 %div= @product.description
 - if user_signed_in?
