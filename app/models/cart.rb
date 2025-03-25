@@ -24,6 +24,13 @@ class Cart < ApplicationRecord
 
   SHIPPING_COST = 600
 
+  COD_FEE = {
+    0..9_999 => Money.new(300),
+    10_000..29_999 => Money.new(400),
+    30_000..99_999 => Money.new(600),
+    100_000..Float::INFINITY => Money.new(1_000),
+  }.freeze
+
   def subtotal_price
     Money.new(cart_items.eager_load(:product).sum { _1.product.price.cents })
   end
@@ -35,6 +42,11 @@ class Cart < ApplicationRecord
       additional_units = ((cart_items.size - 5).to_f / 5).ceil
       Money.new(SHIPPING_COST + (additional_units * SHIPPING_COST))
     end
+  end
+
+  # 合計金額からCOD_FEEを判定する
+  def cod_fee
+    COD_FEE.find { |key, _| key.cover?(subtotal_price.cents) }&.last || Money.new(0)
   end
 
   def order!
