@@ -23,4 +23,8 @@
 class ShippingAddress < ApplicationRecord
   belongs_to :user
   belongs_to :prefecture
+
+  validates :city, presence: true
+  validates :postal_code, presence: true
+  validates :recipient_name, presence: true
 end
