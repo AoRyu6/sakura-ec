@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
   has_many :order_items, through: :orders
+  has_many :shipping_addresses, dependent: :destroy
 
   validates :name, presence: true
 end
