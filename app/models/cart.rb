@@ -22,8 +22,11 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
 
-  def total_price
+  def subtotal_price
     cart_items.eager_load(:product).sum { _1.product.price }
+  end
+
+  def total_price
   end
 
   def order!

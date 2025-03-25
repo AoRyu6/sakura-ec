@@ -31,14 +31,14 @@
         .card.shadow-sm.border-0.p-3
           .d-flex.align-items-center.justify-content-between.w-100.border-bottom.pb-2.mb-2
             %span 小計:
-            %span.text-end= @cart.total_price.format
+            %span.text-end= @cart.subtotal_price.format
           .d-flex.align-items-center.justify-content-between.w-100.border-bottom.pb-2.mb-2
             %span 配送料・手数料:
             %span.text-end 600円
           .d-flex.align-items-center.justify-content-between.w-100.pb-2.fw-bold
             %span 合計:
             -# #TODO - 税金計算は後で実装
-            %span= @cart.total_price.format
+            -# %span= @cart.total_price.format
           = button_to orders_path, class: 'btn btn-primary btn-lg w-100 rounded-3 shadow-sm mt-3', data: { turbo_confirm: '注文を確定してもよろしいですか?' } do
             %i.bi.bi-cart-check.me-2
             %span 購入する
