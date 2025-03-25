@@ -22,11 +22,10 @@
 #
 FactoryBot.define do
   factory :shipping_address do
-    recipient_name { 'MyString' }
-    postal_code { 'MyString' }
-    address_level1 { 'MyString' }
-    address_level2 { 'MyString' }
-    street_address { 'MyString' }
-    user { nil }
+    recipient_name { Faker::Name.name }
+    city { Faker::Address.city }
+    postal_code { Faker::Address.zip_code }
+    street_address { Faker::Address.street_address }
+    prefecture_id { Faker::Number.between(from: 1, to: 47) }
   end
 end
