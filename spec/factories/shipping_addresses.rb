@@ -6,7 +6,7 @@
 #  city           :string           not null
 #  postal_code    :string           not null
 #  recipient_name :string           not null
-#  street_address :string           not null
+#  street_address :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  prefecture_id  :integer          not null
