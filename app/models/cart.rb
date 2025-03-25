@@ -22,6 +22,7 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
 
+  TAX_RATE = 1.08
   SHIPPING_COST = 600
 
   COD_FEE = {
@@ -35,6 +36,10 @@ class Cart < ApplicationRecord
     Money.new(cart_items.eager_load(:product).sum { _1.product.price.cents })
   end
 
+  def total_price_with_tax
+    subtotal_price * TAX_RATE
+  end
+
   def shipping_fee
     if cart_items.size <= 5
       Money.new(SHIPPING_COST)
@@ -44,9 +49,12 @@ class Cart < ApplicationRecord
     end
   end
 
-  # 合計金額からCOD_FEEを判定する
   def cod_fee
     COD_FEE.find { |key, _| key.cover?(subtotal_price.cents) }&.last || Money.new(0)
+  end
+
+  def total_price
+    (subtotal_price * TAX_RATE) + shipping_fee + cod_fee
   end
 
   def order!
