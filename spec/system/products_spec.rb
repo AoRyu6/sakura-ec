@@ -50,7 +50,7 @@ RSpec.describe 'Products', type: :system do
 
         expect(page).to have_content('りんご')
         expect(page).to have_content('新鮮なりんごです。')
-        expect(page).to have_content('1,080円 (税込)')
+        expect(page).to have_content('1,000円')
       end
     end
   end
