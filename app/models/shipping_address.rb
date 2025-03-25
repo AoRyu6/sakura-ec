@@ -21,6 +21,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ShippingAddress < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to :user
   belongs_to :prefecture
 
