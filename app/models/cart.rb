@@ -33,7 +33,7 @@ class Cart < ApplicationRecord
   }.freeze
 
   def subtotal_price
-    Money.new(cart_items.eager_load(:product).sum { _1.product.price.cents })
+    Money.new(cart_items.preload(:product).sum { _1.product.price.cents })
   end
 
   def total_price_with_tax
