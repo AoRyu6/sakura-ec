@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      shipping_address:
+        recipient_name: "宛名"
+        prefecture_id: "都道府県"
+        city: "市区町村"
+        postal_code: "郵便番号"
+        street_address: "建物名"
