@@ -2,7 +2,7 @@ class ShippingAddressesController < ApplicationController
   before_action :set_shipping_address, only: %i[edit update destroy]
 
   def index
-    @shipping_addresses = current_user.shipping_addresses
+    @shipping_addresses = current_user.shipping_addresses.default_order
   end
 
   def new

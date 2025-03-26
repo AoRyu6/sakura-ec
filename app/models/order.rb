@@ -19,6 +19,9 @@
 class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items, dependent: :destroy
+  has_many :products, through: :order_items
+
+  scope :default_order, -> { order(created_at: :desc) }
 
   def total_price
     order_items.sum(&:price).format

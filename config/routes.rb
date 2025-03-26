@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resource :cart, only: :show do
     resources :cart_items, only: %i[create destroy]
   end
-  resources :orders, only: :create
+  resources :orders, only: %i[index show create]
   resources :shipping_addresses
 
   get 'up' => 'rails/health#show', as: :rails_health_check

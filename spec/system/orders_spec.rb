@@ -1,6 +1,44 @@
 require 'rails_helper'
 
 RSpec.describe 'Orders', type: :system do
+  describe '注文履歴一覧機能' do
+    context '商品を購入している場合' do
+      let(:user) { create(:user) }
+      let(:product) { create(:product, :published, name: 'りんご') }
+
+      before do
+        sign_in user
+        order = create(:order, user: user)
+        create(:order_item, order: order, product: product)
+      end
+
+      it '注文履歴が表示されること' do
+        visit orders_path
+
+        expect(page).to have_content('りんご')
+      end
+    end
+  end
+
+  describe '注文詳細機能' do
+    context '商品を購入している場合' do
+      let(:user) { create(:user) }
+      let(:product) { create(:product, :published, name: 'りんご') }
+      let(:order) { create(:order, user: user) }
+
+      before do
+        sign_in user
+        create(:order_item, order: order, product: product)
+      end
+
+      it '注文詳細が表示されること' do
+        visit order_path(order)
+
+        expect(page).to have_content('りんご')
+      end
+    end
+  end
+
   describe '注文機能' do
     context 'ログインしている場合' do
       let(:user) { create(:user, email: 'user@example.com') }

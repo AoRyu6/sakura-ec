@@ -29,4 +29,6 @@ class ShippingAddress < ApplicationRecord
   validates :city, presence: true
   validates :postal_code, presence: true
   validates :recipient_name, presence: true
+
+  scope :default_order, -> { order(created_at: :desc) }
 end
