@@ -16,7 +16,7 @@
           %tr
             %td.text-center
               - if order_item.product.image.attached?
-                = image_tag order_item.product.image.variant(:icon), class: 'img-thumbnail', style: 'width: 60px; height: 60px; object-fit: cover;'
+                = image_tag order_item.product.image.variant(:icon), class: 'img-thumbnail'
               - else
                 = image_tag 'no_image.png', width: 60, height: 60, class: 'img-thumbnail'
             %td
