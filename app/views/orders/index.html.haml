@@ -1,0 +1,15 @@
+%table.table
+  %thead
+    %tr
+      %th ID
+      %th 価格
+      %th 商品
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= link_to order.id, order_path(order)
+        %td= order.price
+        %td
+          %ul.list-unstyled
+            - order.order_items.each do |order_item|
+              %li= link_to order_item.product.name, product_path(order_item.product)
