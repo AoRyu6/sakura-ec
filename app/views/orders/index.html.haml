@@ -13,3 +13,5 @@
           %ul.list-unstyled
             - order.order_items.each do |order_item|
               %li= link_to order_item.product.name, product_path(order_item.product)
+
+!= pagy_bootstrap_nav(@pagy)
