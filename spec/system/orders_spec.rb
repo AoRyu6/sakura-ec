@@ -14,6 +14,7 @@ RSpec.describe 'Orders', type: :system do
 
       it '注文履歴が表示されること' do
         visit orders_path
+
         expect(page).to have_content('りんご')
       end
     end
